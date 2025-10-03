@@ -1,31 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:text="${Titulo}">Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Informacion de empleado</h1>
     <ul>
-    <li>
-        <strong>Nombre:</strong> <span th:text="${Empleado.nombre}"></span>
-    </li>
-    <li>
+      <li>
+        <strong>Nombre:</strong>
+        <span
+          th:text="${Empleado.nombre !=null ? Empleado.nombre : 'No tiene nombre el pibe'}"
+        ></span>
+      </li>
+      <li>
         <strong>Apellido:</strong> <span th:text="${Empleado.apellido}"></span>
-    </li>
-    <li>
+      </li>
+      <li>
         <strong>Dirección:</strong>
-        <span th:text="${Empleado.direccion}"></span>
-    </li>
-    <li>
+        <span
+          th:if="${Empleado.direccion != null}"
+          th:text="${Empleado.direccion}"
+        ></span>
+        <span
+          th:if="${Empleado.direccion == null}"
+          th:text="${'No tiene direccion'}"
+        ></span>
+      </li>
+      <li>
         <strong>Puesto:</strong> <span th:text="${Empleado.puesto}"></span>
-    </li>
-    <li><strong>Edad:</strong> <span th:text="${Empleado.edad}"></span></li>
-    <li>
+      </li>
+      <li><strong>Edad:</strong> <span th:text="${Empleado.edad}"></span></li>
+      <li>
         <strong>Teléfono:</strong> <span th:text="${Empleado.telefono}"></span>
-    </li>
-    <li><strong>ID:</strong> <span th:text="${Empleado.id}"></span></li>
+      </li>
+      <li><strong>ID:</strong> <span th:text="${Empleado.id}"></span></li>
     </ul>
-</body>
+
+    <h1>Lista Empleados</h1>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Dirección</th>
+          <th>Puesto</th>
+          <th>Edad</th>
+          <th>Teléfono</th>
+          <th>Departamento</th>
+        </tr>
+      </thead>
+      <tbody th:each="empleado : ${Empleados}">
+        <tr>
+          <td th:text="${empleado.nombre}"></td>
+          <td th:text="${empleado.apellido}"></td>
+          <td th:text="${empleado.direccion}"></td>
+          <td th:text="${empleado.puesto}"></td>
+          <td th:text="${empleado.edad}"></td>
+          <td th:text="${empleado.telefono}"></td>
+          <td th:text="${empleado.id}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
 </html>
